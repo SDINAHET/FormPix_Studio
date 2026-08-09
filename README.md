@@ -366,6 +366,6 @@ Ne publiez jamais d’image privée, de jeton, de mot de passe ou de donnée per
 ## Auteur, contact et licence
 
 **Stéphane Dinahet**
-[Dépôt FormPix Studio](https://github.com/SDINAHET/FormPix_Studio) · [GitHub @SDINAHET](https://github.com/SDINAHET) · [contacts@loto-tracker.fr](mailto:contacts@loto-tracker.fr)
+[Dépôt FormPix Studio](https://github.com/SDINAHET/FormPix_Studio) · [GitHub @SDINAHET](https://github.com/SDINAHET) · [contact@loto-tracker.fr](mailto:contact@loto-tracker.fr)
 
 FormPix Studio est distribué sous [licence MIT](LICENSE). Vous pouvez utiliser, modifier et redistribuer le projet en conservant la notice de copyright et le texte de la licence.
