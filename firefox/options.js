@@ -1,10 +1,12 @@
 const $ = (id) => document.getElementById(id);
+const IS_EMBEDDED = new URLSearchParams(location.search).get("panel") === "embed";
+document.body.classList.toggle("embedded", IS_EMBEDDED);
 const DEFAULTS = {
   defaultFormat: "none", qualities: { jpeg: 95, webp: 90, avif: 85 }, showCopyPng: true,
   addTimestamp: true, keepHistory: false, saveAs: true, subfolder: "", uiLanguage: "browser", accessMode: "all"
 };
-const GITHUB_URL = "https://github.com/SDINAHET";
-const SUPPORT_URL = `${GITHUB_URL}/FormPix-Studio/issues`;
+const GITHUB_URL = "https://github.com/SDINAHET/FormPix_Studio";
+const SUPPORT_URL = `${GITHUB_URL}/issues`;
 const STORE_URL = `https://chromewebstore.google.com/detail/${chrome.runtime.id}`;
 const IS_PUBLISHED = Boolean(chrome.runtime.getManifest().update_url);
 const t = (value) => window.fpTranslate?.(value) || value;
@@ -107,10 +109,11 @@ $("settingsFile").addEventListener("change", async () => {
   } catch (error) { $("saveStatus").textContent = error.message; }
 });
 $("backButton").addEventListener("click", () => {
-  if (new URLSearchParams(location.search).get("panel") === "embed") parent.postMessage("formpix:close-settings", location.origin);
+  if (IS_EMBEDDED) parent.postMessage("formpix:close-settings", location.origin);
   else chrome.tabs.getCurrent((tab) => tab?.id ? chrome.tabs.remove(tab.id) : window.close());
 });
 $("authorGithub").addEventListener("click", () => chrome.tabs.create({ url: GITHUB_URL }));
+$("contactButton").addEventListener("click", () => chrome.tabs.create({ url: "mailto:contacts@loto-tracker.fr" }));
 $("feedbackButton").addEventListener("click", () => chrome.tabs.create({ url: SUPPORT_URL }));
 $("supportButton").addEventListener("click", () => chrome.tabs.create({ url: SUPPORT_URL }));
 $("rateButton").addEventListener("click", () => {
