@@ -469,7 +469,7 @@ ui.settingsButton.addEventListener("click", () => {
   ui.settingsButton.title = opening ? "Back to FormPix Studio" : "Settings";
   ui.settingsButton.setAttribute("aria-label", ui.settingsButton.title);
 });
-$("mainAuthorButton").addEventListener("click", () => chrome.tabs.create({ url: "https://github.com/SDINAHET" }));
+$("mainAuthorButton").addEventListener("click", () => chrome.tabs.create({ url: "https://github.com/SDINAHET/FormPix_Studio" }));
 window.addEventListener("message", (event) => {
   if (event.origin !== location.origin || event.data !== "formpix:close-settings") return;
   $("settingsFrame").classList.add("hidden");
