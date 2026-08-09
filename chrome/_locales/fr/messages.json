@@ -1,0 +1,7 @@
+{
+  "extName": { "message": "FormPix Studio — Convertir et optimiser" },
+  "extDescription": { "message": "Préparez localement vos images pour les formulaires et le Web : recadrage, redimensionnement, conversion et limite de poids." },
+  "actionTitle": { "message": "Ouvrir FormPix Studio" },
+  "menuOpen": { "message": "Ouvrir dans FormPix Studio" }, "menuPrepare": { "message": "Préparer l’image en…" }, "menuCopyPng": { "message": "Ouvrir et copier en PNG" },
+  "menuQuick": { "message": "Préparer rapidement en $FORMAT$", "placeholders": { "format": { "content": "$1" } } }
+}

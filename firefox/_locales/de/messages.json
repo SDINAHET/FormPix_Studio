@@ -1,0 +1,7 @@
+{
+  "extName": { "message": "FormPix Studio — Konvertieren und optimieren" },
+  "extDescription": { "message": "Bilder lokal für Formulare und das Web vorbereiten: zuschneiden, skalieren, konvertieren und Dateigrößen einhalten." },
+  "actionTitle": { "message": "FormPix Studio öffnen" },
+  "menuOpen": { "message": "In FormPix Studio öffnen" }, "menuPrepare": { "message": "Bild vorbereiten als…" }, "menuCopyPng": { "message": "Öffnen und als PNG kopieren" },
+  "menuQuick": { "message": "Schnell als $FORMAT$ vorbereiten", "placeholders": { "format": { "content": "$1" } } }
+}
