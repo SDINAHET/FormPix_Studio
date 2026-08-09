@@ -113,7 +113,7 @@ $("backButton").addEventListener("click", () => {
   else chrome.tabs.getCurrent((tab) => tab?.id ? chrome.tabs.remove(tab.id) : window.close());
 });
 $("authorGithub").addEventListener("click", () => chrome.tabs.create({ url: GITHUB_URL }));
-$("contactButton").addEventListener("click", () => chrome.tabs.create({ url: "mailto:contacts@loto-tracker.fr" }));
+$("contactButton").addEventListener("click", () => chrome.tabs.create({ url: "mailto:contact@loto-tracker.fr" }));
 $("feedbackButton").addEventListener("click", () => chrome.tabs.create({ url: SUPPORT_URL }));
 $("supportButton").addEventListener("click", () => chrome.tabs.create({ url: SUPPORT_URL }));
 $("rateButton").addEventListener("click", () => {
