@@ -22,7 +22,6 @@ button { cursor: pointer; }
 .topbar h1 { margin: 0; font-size: 18px; letter-spacing: -.03em; }
 .topbar p { margin: 1px 0 0; color: var(--muted); font-size: 9px; }
 .main-author{display:block;margin:2px 0 0;padding:0;border:0;background:transparent;color:#9f95ff;font-size:7px;text-align:left}.main-author:hover{color:#c5beff;text-decoration:underline}
-.main-contact{display:inline-block;margin-top:1px;color:#7f8a83;font-size:7px;text-decoration:none}.main-contact:hover{color:#39e69d;text-decoration:underline}
 .icon-button { margin-left: auto; width: 34px; height: 34px; border: 1px solid var(--line); border-radius: 10px; background: #111513; color: #cbd2cd; }
 .icon-button:hover { border-color: var(--violet); color: #fff; }
 .empty-state { display: grid; place-items: center; min-height: calc(100vh - 85px); padding: 35px 18px; border: 1px dashed #38413c; border-radius: 20px; background: rgba(17,22,19,.74); text-align: center; }
