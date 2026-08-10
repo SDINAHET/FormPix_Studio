@@ -33,17 +33,11 @@ chrome.storage.onChanged.addListener((changes, area) => {
   if (area === "sync" && changes.accessMode) cachedAccessMode = changes.accessMode.newValue || "all";
 });
 
-async function openExtensionPanel(tabId) {
-  if (chrome.sidePanel?.open) return chrome.sidePanel.open({ tabId });
-  if (chrome.sidebarAction?.open) return chrome.sidebarAction.open();
-  throw new Error("This browser does not provide a compatible sidebar API.");
+async function openExtensionPanel() {
+  return chrome.sidebarAction.open();
 }
 
-if (chrome.sidePanel?.setPanelBehavior) {
-  chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true }).catch(() => {});
-} else if (chrome.action?.onClicked && chrome.sidebarAction?.open) {
-  chrome.action.onClicked.addListener(() => chrome.sidebarAction.open());
-}
+chrome.action.onClicked.addListener(() => chrome.sidebarAction.open());
 
 chrome.contextMenus.onClicked.addListener(async (info, tab) => {
   if (!String(info.menuItemId).startsWith("formpix-") || !info.srcUrl || !tab?.id) return;

@@ -5,11 +5,22 @@
   "version": "0.5.2",
   "description": "__MSG_extDescription__",
   "default_locale": "en",
-  "minimum_chrome_version": "116",
-  "permissions": ["storage", "sidePanel", "contextMenus", "downloads", "clipboardWrite"],
+  "permissions": ["storage", "contextMenus", "downloads", "clipboardWrite"],
   "optional_host_permissions": ["http://*/*", "https://*/*"],
   "background": {
-    "service_worker": "background.js"
+    "scripts": ["background.js"]
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "formpix-studio@sdinahet.github.io",
+      "strict_min_version": "140.0",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    },
+    "gecko_android": {
+      "strict_min_version": "142.0"
+    }
   },
   "icons": {
     "16": "icons/icon-16.png",
@@ -28,7 +39,10 @@
     "page": "options.html",
     "open_in_tab": true
   },
-  "side_panel": {
-    "default_path": "editor.html"
+  "sidebar_action": {
+    "default_title": "FormPix Studio",
+    "default_panel": "editor.html",
+    "default_icon": "icons/icon-48.png",
+    "open_at_install": false
   }
 }
