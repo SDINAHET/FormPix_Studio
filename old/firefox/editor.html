@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FormPix Studio</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div class="brand-mark" aria-hidden="true"><img src="icons/icon-48.png" alt="" /></div>
+      <div>
+        <h1>FormPix Studio</h1>
+        <p>Prepare images locally. Nothing is uploaded.</p>
+        <button id="mainAuthorButton" class="main-author" type="button">Stéphane Dinahet · FormPix Studio sur GitHub ↗</button>
+      </div>
+      <button id="settingsButton" class="icon-button" type="button" title="Settings" aria-label="Settings">⚙</button>
+      <button id="resetButton" class="icon-button" type="button" title="Start over" aria-label="Start over">↺</button>
+    </header>
+    <iframe id="settingsFrame" class="settings-frame hidden" src="options.html?panel=embed" title="FormPix Studio Settings"></iframe>
+
+    <section id="emptyState" class="empty-state">
+      <div class="drop-icon" aria-hidden="true">⇩</div>
+      <h2>Drop an image here</h2>
+      <p>PNG, JPEG, WebP, GIF, BMP or AVIF</p>
+      <button id="chooseButton" class="primary-button" type="button">Choose an image</button>
+      <button id="pasteButton" class="secondary-button" type="button">Paste from clipboard</button>
+      <input id="fileInput" type="file" accept="image/*" multiple hidden />
+      <div id="urlImport" class="url-import hidden">
+        <span>Image selected from the page</span>
+        <button id="loadUrlButton" type="button">Allow and import</button>
+      </div>
+      <p class="privacy-note">Processing stays in this browser. EXIF metadata is removed when exporting.</p>
+    </section>
+
+    <section id="workspace" class="workspace hidden">
+      <section class="preview-card">
+        <div class="preview-toolbar">
+          <div>
+            <strong id="sourceName">image</strong>
+            <span id="sourceMeta">—</span>
+          </div>
+          <div class="preview-actions">
+            <button id="compareButton" class="text-button" type="button">Show original</button>
+            <button id="replaceButton" class="text-button" type="button">Replace</button>
+          </div>
+        </div>
+        <div class="canvas-wrap checkerboard">
+          <canvas id="previewCanvas" aria-label="Image preview"></canvas>
+        </div>
+        <div class="compare-row">
+          <span>Original <strong id="originalSize">—</strong></span>
+          <span class="arrow">→</span>
+          <span>Output <strong id="outputSize">—</strong></span>
+        </div>
+        <p id="cropHelp" class="crop-help hidden">Drag the image to choose the crop.</p>
+      </section>
+
+      <section id="batchPanel" class="panel batch-panel hidden">
+        <div class="panel-title"><div><span class="step">●</span><h2>Batch queue</h2></div><span id="batchCount" class="hint">0 images</span></div>
+        <div id="batchList" class="batch-list"></div>
+        <button id="downloadAllButton" class="secondary-wide" type="button">Process and download all</button>
+      </section>
+
+      <section class="panel">
+        <div class="panel-title">
+          <div><span class="step">1</span><h2>Required format</h2></div>
+          <span class="hint">For forms and websites</span>
+        </div>
+        <div class="format-grid" role="radiogroup" aria-label="Output format">
+          <button class="format-button active" type="button" data-format="image/jpeg"><strong>JPG</strong><span>Small photos</span></button>
+          <button class="format-button" type="button" data-format="image/png"><strong>PNG</strong><span>Transparency</span></button>
+          <button class="format-button" type="button" data-format="image/webp"><strong>WebP</strong><span>For developers</span></button>
+          <button class="format-button" type="button" data-format="image/avif"><strong>AVIF</strong><span>Smallest files</span></button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-title">
+          <div><span class="step">2</span><h2>Dimensions</h2></div>
+          <label class="switch-label"><input id="lockRatio" type="checkbox" checked /><span>Lock ratio</span></label>
+        </div>
+        <label class="field full">
+          <span>Preset</span>
+          <select id="presetSelect">
+            <option value="original">Original dimensions</option>
+            <option value="profile">Profile photo · 512 × 512</option>
+            <option value="form">Online form · 800 × 800</option>
+            <option value="fullhd">Full HD · 1920 × 1080</option>
+            <option value="youtube">YouTube thumbnail · 1280 × 720</option>
+            <option value="linkedin">LinkedIn post · 1200 × 627</option>
+            <option value="instagram">Instagram square · 1080 × 1080</option>
+            <option value="story">Story / Reel · 1080 × 1920</option>
+            <option value="opengraph">Website Open Graph · 1200 × 630</option>
+            <option value="webhero">Website hero · 1600 × 900</option>
+            <option value="custom">Custom dimensions</option>
+          </select>
+        </label>
+        <div class="two-columns dimensions">
+          <label class="field"><span>Width</span><div class="unit-input"><input id="widthInput" type="number" min="1" max="12000" /><b>px</b></div></label>
+          <label class="field"><span>Height</span><div class="unit-input"><input id="heightInput" type="number" min="1" max="12000" /><b>px</b></div></label>
+        </div>
+        <div class="segmented" role="radiogroup" aria-label="Image fit">
+          <button class="active" type="button" data-fit="contain">Fit</button>
+          <button type="button" data-fit="cover">Fill & crop</button>
+          <button type="button" data-fit="stretch">Stretch</button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-title"><div><span class="step">3</span><h2>Background & transparency</h2></div></div>
+        <label class="field full">
+          <span>Canvas background</span>
+          <select id="backgroundMode">
+            <option value="transparent">Transparent (PNG/WebP)</option>
+            <option value="white">White</option>
+            <option value="custom">Custom color</option>
+          </select>
+        </label>
+        <div id="customColorRow" class="color-row hidden">
+          <input id="backgroundColor" type="color" value="#ffffff" />
+          <span id="backgroundColorValue">#FFFFFF</span>
+        </div>
+        <label class="check-card">
+          <input id="removeSolidBackground" type="checkbox" />
+          <span><strong>Make a solid background transparent</strong><small>Best for logos and product images on a plain background.</small></span>
+        </label>
+        <div id="toleranceRow" class="range-field hidden">
+          <div><span>Tolerance</span><output id="toleranceValue">24</output></div>
+          <input id="toleranceInput" type="range" min="0" max="100" value="24" />
+          <small>Lower values preserve more edge detail.</small>
+        </div>
+        <p id="transparencyWarning" class="inline-warning hidden">JPEG does not support transparency. Transparent pixels will use the selected background color.</p>
+      </section>
+
+      <section class="panel">
+        <div class="panel-title"><div><span class="step">4</span><h2>Quality & maximum size</h2></div></div>
+        <div class="range-field">
+          <div><span>Quality</span><output id="qualityValue">88%</output></div>
+          <input id="qualityInput" type="range" min="35" max="100" value="88" />
+        </div>
+        <div class="two-columns">
+          <label class="field"><span>Maximum file size</span><div class="unit-input"><input id="maxSizeInput" type="number" min="1" placeholder="Optional" /><b>KB</b></div></label>
+          <label class="check-card compact"><input id="strictDimensions" type="checkbox" checked /><span><strong>Exact size</strong><small>Never reduce dimensions</small></span></label>
+        </div>
+        <div class="quick-limits" aria-label="Quick file size limits">
+          <button type="button" data-limit="100">≤ 100 KB</button>
+          <button type="button" data-limit="500">≤ 500 KB</button>
+          <button type="button" data-limit="1024">≤ 1 MB</button>
+          <button type="button" data-limit="0">No limit</button>
+        </div>
+        <p id="sizeMessage" class="helper-text">FormPix Studio will find the best quality under the requested limit.</p>
+      </section>
+
+      <section class="export-card">
+        <div class="export-summary">
+          <span id="outputBadge">JPG</span>
+          <div><strong id="outputDimensions">—</strong><small id="outputDetails">Ready to process</small></div>
+        </div>
+        <label class="filename-field"><span>Filename</span><input id="filenameInput" type="text" /></label>
+        <button id="downloadButton" class="download-button" type="button"><span>Download optimized image</span><b id="downloadSize">—</b></button>
+        <p id="statusMessage" class="status-message" role="status"></p>
+      </section>
+    </section>
+  </main>
+  <script src="i18n.js"></script>
+  <script src="editor.js"></script>
+</body>
+</html>

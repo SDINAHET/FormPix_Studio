@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FormPix Studio — Settings</title>
+  <link rel="stylesheet" href="options.css" />
+</head>
+<body>
+  <main class="settings-shell">
+    <header>
+      <div class="logo"><img src="icons/icon-48.png" alt="" /></div>
+      <div class="header-copy"><h1>Settings</h1><p>Preferences, privacy and local history.</p></div>
+      <span class="version">v0.5.2 · 20 languages</span><button id="backButton" class="back-button" type="button" aria-label="Back to FormPix Studio">← <span>Back</span></button>
+    </header>
+
+    <section class="card">
+      <div class="heading"><span>00</span><div><h2>Interface language</h2><p>Use Chrome's language automatically or choose one manually.</p></div></div>
+      <label class="language-field"><span>Language</span><select id="uiLanguage">
+        <option value="browser">Browser default</option><option value="en">English</option><option value="fr">Français</option><option value="de">Deutsch</option><option value="es">Español</option><option value="it">Italiano</option><option value="pt_BR">Português (Brasil)</option><option value="nl">Nederlands</option><option value="pl">Polski</option><option value="sv">Svenska</option><option value="tr">Türkçe</option><option value="id">Bahasa Indonesia</option><option value="uk">Українська</option><option value="ru">Русский</option><option value="ar">العربية</option><option value="hi">हिन्दी</option><option value="th">ไทย</option><option value="vi">Tiếng Việt</option><option value="ja">日本語</option><option value="ko">한국어</option><option value="zh_CN">简体中文</option>
+      </select></label>
+    </section>
+
+    <section class="card">
+      <div class="heading"><span>01</span><div><h2>Default format</h2><p>Adds a quick action directly to the image context menu.</p></div></div>
+      <div class="choice-grid" id="defaultFormats">
+        <label><input type="radio" name="defaultFormat" value="none" checked /><strong>None</strong><small>Show every format</small></label>
+        <label><input type="radio" name="defaultFormat" value="jpeg" /><strong>JPG</strong><small>Best for photos</small></label>
+        <label><input type="radio" name="defaultFormat" value="png" /><strong>PNG</strong><small>Lossless transparency</small></label>
+        <label><input type="radio" name="defaultFormat" value="webp" /><strong>WebP</strong><small>Modern web assets</small></label>
+        <label><input type="radio" name="defaultFormat" value="avif" /><strong>AVIF</strong><small>Best compression</small></label>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="heading"><span>02</span><div><h2>Quality defaults</h2><p>Used when a new image is opened.</p></div></div>
+      <label class="slider"><div><strong>JPG quality</strong><output id="jpegQualityValue">95%</output></div><input id="jpegQuality" type="range" min="35" max="100" value="95" /></label>
+      <label class="slider"><div><strong>WebP quality</strong><output id="webpQualityValue">90%</output></div><input id="webpQuality" type="range" min="35" max="100" value="90" /></label>
+      <label class="slider"><div><strong>AVIF quality</strong><output id="avifQualityValue">85%</output></div><input id="avifQuality" type="range" min="35" max="100" value="85" /></label>
+    </section>
+
+    <section class="card">
+      <div class="heading"><span>03</span><div><h2>Context menu & filenames</h2><p>Keep common actions close without clutter.</p></div></div>
+      <label class="toggle"><span><strong>Copy as PNG action</strong><small>Show the action when right-clicking an image.</small></span><input id="showCopyPng" type="checkbox" checked /></label>
+      <label class="toggle"><span><strong>Add a timestamp</strong><small>Example: image-20260809-193734.webp</small></span><input id="addTimestamp" type="checkbox" checked /></label>
+      <div class="access-box"><strong>Website image access</strong><p>Choose how FormPix Studio receives images selected with the right-click menu.</p>
+        <label><input type="radio" name="accessMode" value="all" checked /><span><b>Allow once for all websites</b><small>Chrome asks once, then imports automatically everywhere.</small></span></label>
+        <label><input type="radio" name="accessMode" value="site" /><span><b>Ask for each new website</b><small>Permission is remembered for that domain.</small></span></label>
+      </div>
+      <label class="toggle"><span><strong>Show “Save as” dialog</strong><small>Choose the destination for each download.</small></span><input id="saveAs" type="checkbox" checked /></label>
+      <label class="slider"><div><strong>Downloads subfolder</strong><output>Optional</output></div><input id="subfolder" type="text" maxlength="80" placeholder="Example: FormPix Studio" /></label>
+    </section>
+
+    <section class="card accent">
+      <div class="heading"><span>04</span><div><h2>Privacy</h2><p>FormPix Studio has no analytics switch because it sends no analytics at all.</p></div></div>
+      <div class="privacy-grid"><div><b>0</b><span>Images uploaded</span></div><div><b>0</b><span>Trackers</span></div><div><b>0</b><span>Remote scripts</span></div></div>
+    </section>
+
+    <section class="card">
+      <div class="heading"><span>05</span><div><h2>Local history</h2><p>Optional and stored only in this Chrome profile.</p></div></div>
+      <label class="toggle"><span><strong>Keep export history</strong><small>Stores filename, format, dimensions, source and size—not image pixels.</small></span><input id="keepHistory" type="checkbox" /></label>
+      <div class="stats"><div><strong id="totalCount">0</strong><span>Total</span></div><div><strong id="weekCount">0</strong><span>Last 7 days</span></div><div><strong id="monthCount">0</strong><span>Last 30 days</span></div></div>
+      <div id="historyList" class="history-list"><p>No exports yet.</p></div>
+      <button id="clearHistory" class="danger" type="button">Clear history</button>
+    </section>
+
+    <section class="card">
+      <div class="heading"><span>06</span><div><h2>Backup & restore</h2><p>Move settings to another Chrome profile or browser.</p></div></div>
+      <div class="button-row"><button id="exportSettings" type="button">Export settings</button><button id="importSettings" type="button">Import settings</button></div>
+      <input id="settingsFile" type="file" accept="application/json" hidden />
+    </section>
+
+    <section class="card about-card">
+      <div class="heading"><span>07</span><div><h2>About & support</h2><p>FormPix Studio is designed and developed by Stéphane Dinahet.</p></div></div>
+      <button id="authorGithub" class="author-link" type="button"><img src="icons/icon-48.png" alt="" /><span><strong>Stéphane Dinahet</strong><small>FormPix Studio · GitHub ↗</small></span></button>
+      <button id="contactButton" class="contact-button" type="button">✉ contact@loto-tracker.fr</button>
+      <div class="support-grid">
+        <button id="rateButton" type="button"><b>★</b><span>Rate the extension</span></button>
+        <button id="feedbackButton" type="button"><b>●</b><span>Send feedback</span></button>
+        <button id="supportButton" type="button"><b>?</b><span>Get assistance</span></button>
+        <button id="shareButton" type="button"><b>↗</b><span>Share FormPix Studio</span></button>
+      </div>
+      <p class="store-note">Rating and sharing links become active after publication on the Chrome Web Store.</p>
+    </section>
+
+    <footer><span id="saveStatus">Settings save automatically.</span></footer>
+  </main>
+  <script src="i18n.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

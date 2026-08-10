@@ -1,0 +1,7 @@
+{
+  "extName": { "message": "FormPix Studio — Convert, Resize & Optimize" },
+  "extDescription": { "message": "Crop, resize, convert and optimize images locally for forms and the web. Supports PNG, JPEG, WebP, AVIF and transparency." },
+  "actionTitle": { "message": "Open FormPix Studio" },
+  "menuOpen": { "message": "Open in FormPix Studio" }, "menuPrepare": { "message": "Prepare image as…" }, "menuCopyPng": { "message": "Open and copy as PNG" },
+  "menuQuick": { "message": "Prepare quickly as $FORMAT$", "placeholders": { "format": { "content": "$1" } } }
+}
